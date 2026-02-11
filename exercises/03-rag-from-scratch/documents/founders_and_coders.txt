@@ -1,0 +1,15 @@
+The Realm of Founders and Coders
+
+Founders and Coders is a magical microstate nestled between the Cascading Style Sheets mountains to the west and the Binary Sea to the east. It was established in the Year of the First Commit by a council of six elders who believed that the ancient arts of artificial intelligence should be freely taught to all who sought them. The realm's motto, inscribed above the gates of the Great Hall, reads: "In open weights we trust, in collaboration we thrive."
+
+The capital city is called Localhost, a bustling metropolis where all roads lead to Port 3000. Localhost is famous for its ever-shifting architecture — buildings regularly refactor themselves overnight, sometimes merging two towers into one or splitting a single hall into microservices. Visitors often get lost because the street layout follows semantic versioning: every major redesign resets the numbering from zero.
+
+The realm's currency is the Token, subdivided into 1,000 Embeddings. A loaf of bread costs roughly 4 Tokens, while a rare spellbook on transformer architectures might fetch 500 Tokens or more. The Central Bank of Founders and Coders is governed by the Weights and Biases Committee, who adjust the Token supply based on the current loss function of the economy.
+
+Founders and Coders has a population of approximately 12,000 permanent residents, though this swells to nearly 30,000 during the annual Festival of Demos, when apprentices from across the land present their capstone projects. The festival lasts seven days and culminates in the Ceremony of Deployment, where the best models and systems are launched into the production clouds above the realm.
+
+The climate is temperate, with warm summers known as "hot reloads" and cool winters called "cold starts." Rain is common in autumn, which locals refer to as "data showers" because the droplets carry faint traces of structured information that nourish the Semantic Kelp forests along the coast.
+
+Education and research are the backbone of the realm. Every citizen is entitled to free apprenticeship at one of the realm's many guilds. The most prestigious is the Guild of Foundation Models, located in the heart of Localhost. Apprenticeships last 12 weeks, during which students learn the fundamentals of model training (spellcasting), data engineering (potion brewing), and model deployment and serving (enchantment weaving).
+
+The realm is governed by a rotating council called the Standup, which meets every morning at 9:45am sharp in the Glass Terminal. Each council member gives a brief update on what they accomplished yesterday, what they plan to do today, and any blockers they face. Decisions are made by consensus, though contested matters are resolved through code review — both sides present their arguments as pull requests, and the community votes with approvals or change requests.

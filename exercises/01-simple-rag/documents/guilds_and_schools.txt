@@ -1,0 +1,30 @@
+The Guilds and Schools of Founders and Coders
+
+Founders and Coders is home to seven major guilds, each specialising in a different branch of machine intelligence. Every apprentice must choose a primary guild by the end of their fourth week, though they are encouraged to take classes across multiple guilds.
+
+The Guild of Foundation Models
+The most popular guild, attracting roughly 40% of all apprentices. Located in the Grand Tower at the centre of Localhost, the guild teaches both model architecture design (the art of constructing neural networks) and training methodology (the science of teaching them to learn). The guild's master is a veteran mage named Professor Runtime, who insists that all apprentices must be comfortable working at every layer of the stack — from low-level matrix operations to high-level prompt engineering. The guild's emblem is a transformer block crossed with a loss curve.
+
+The Guild of Machine Minds
+Founded by Izaak Sherwood, this guild specialises in frontier AI research, novel architectures, and the creation of autonomous intelligent agents. It is the fastest-growing guild, having doubled in size over the past three years. The guild operates from the Gradient Descent Caverns and is known for its intensive curriculum, which includes courses on attention mechanisms, scaling laws, reinforcement learning from human feedback, and the philosophical implications of creating thinking beings. The guild's emblem is a brain surrounded by a network of glowing nodes.
+
+The Guild of Data Weavers
+This guild focuses on datasets, data pipelines, and the art of transforming raw information into high-quality training data. Their headquarters is the Loom Hall, a vast building filled with magical looms that physically weave data into tapestries — a visualisation technique that allows complex datasets to be understood at a glance and data quality issues to be spotted immediately. The guild master is a quiet genius named Schema, who communicates primarily through beautifully formatted data cards and dataset documentation. The guild's emblem is a shuttle and loom.
+
+The Guild of Adversarial Defence
+Dedicated to AI security, robustness, and the protection of intelligent systems from adversarial attacks, prompt injection, and data poisoning. Their headquarters is, appropriately, hidden — only guild members know its location, and the entrance changes every 24 hours. The guild is led by a mysterious figure known only as "Root," who has never been seen in public without a hooded cloak. Apprentices in this guild learn to think like attackers in order to build more robust models. The guild's emblem is a locked shield.
+
+The Guild of Distributed Intelligence
+This guild specialises in distributed training, model serving at scale, and the management of the realm's compute infrastructure. They work closely with Jason Blackwood at the Foundry and are responsible for ensuring that training runs complete on time and that deployed models remain responsive even during peak inference demand. Their headquarters is the Nimbus Platform, a structure that literally floats above Localhost on a cushion of enchanted cloud compute. The guild's emblem is a castle on a cloud.
+
+The Guild of Interpretable Minds
+Annie Okereke's domain — this guild teaches alignment, interpretability, mechanistic analysis, and the art of understanding what models actually learn. Their headquarters is adjacent to the Mirror Chamber, in a building known as the Activation Library, which contains preserved snapshots of every notable model's internal representations. The guild is unique in requiring all apprentices to complete a "silent week" where they study model behaviour without looking at any training metrics, to develop their instinct for qualitative evaluation. The guild's emblem is an eye within a hexagon.
+
+The Guild of Rigorous Evaluation
+The newest guild, established by Jess Sherbourne just five years ago. This guild is entirely dedicated to the art and science of evaluation — capability benchmarks, safety testing, red-teaming, robustness audits, and adversarial probing. Before the guild's founding, evaluation was taught as a minor topic within each other guild. Jess argued (correctly) that evaluation was important enough to deserve its own dedicated programme. The guild operates from a wing of the Watchtower of Passing Benchmarks. Its emblem is a magnifying glass over a checkmark.
+
+Inter-Guild Competitions
+Every six months, the guilds compete in the Grand Hackathon, a 48-hour event where mixed teams of apprentices from different guilds collaborate to build ambitious AI systems. Past winning projects include: a weather prediction model that outperformed the realm's existing oracles using only attention over satellite embeddings (Year 44), a real-time multilingual translation model that handled 12 languages with a single set of weights (Year 45), and a distributed consensus system powered by multi-agent debate that was later adopted for official realm decision-making (Year 46). The Grand Hackathon trophy is a golden keyboard, and the winning team's names are inscribed on its base.
+
+Continuing Education
+Graduates of the apprenticeship programme are welcome to return for advanced study at any time. Many do, particularly when new breakthroughs emerge. The recent revolution in foundation models has brought a wave of returning graduates to the Guild of Machine Minds, many of whom originally trained in other specialisations. Jaz Sherazi has designed a special "returner's pathway" that accounts for their existing skills and gets them up to speed on the latest architectures, training techniques, and safety practices efficiently.
