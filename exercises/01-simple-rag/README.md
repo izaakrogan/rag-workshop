@@ -19,7 +19,7 @@ We're using OpenAI for embeddings, ChromaDB as a vector database, and Claude for
 Clone the repo and navigate to this exercise:
 
 ```bash
-git clone https://github.com/foundersandcoders/rag-workshop.git
+git clone git@github.com:izaakrogan/rag-workshop.git
 cd rag-workshop/exercises/01-simple-rag
 ```
 
