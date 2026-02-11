@@ -5,7 +5,7 @@ Learn Retrieval-Augmented Generation from prototype to implementation.
 ## Getting started
 
 ```bash
-git clone https://github.com/foundersandcoders/rag-workshop.git
+git clone https://github.com/izaakrogan/rag-workshop.git
 cd rag-workshop
 ```
 
