@@ -1,6 +1,6 @@
 # Exercise 3: RAG from Scratch
 
-OK so in exercise 1 we used OpenAI's API and ChromaDB to build a RAG system. Now we're going to rebuild the whole thing with no embedding API and no vector database. Just sentence-transformers, numpy, and the Claude API. The point is to see every piece of the pipeline. No magic, no black boxes.
+OK so in exercise 1 we used OpenAI's API and ChromaDB to build a RAG system. Now we're going to rebuild the whole thing with no embedding API and no vector database. Just sentence-transformers, numpy, and the Claude API, so you can see every piece of the pipeline.
 
 ## What You'll Build
 
@@ -18,10 +18,24 @@ Same RAG pipeline as before, but you can see everthing:
 - An **Anthropic API key**
 - The `documents/` directory (already included)
 
+Navigate to this exercise's directory:
+
+```bash
+cd 03-rag-from-scratch
+```
+
+(Or `cd ../03-rag-from-scratch` if you're coming from the previous exercise.)
+
 ## Step 1: Install any missing dependancies
 
 ```bash
-pip install sentence-transformers anthropic
+pip install sentence-transformers anthropic python-dotenv
+```
+
+Copy your `.env` file from exercise 1:
+
+```bash
+cp ../01-simple-rag/.env .
 ```
 
 ## Step 2: Build the full pipeline
@@ -33,8 +47,11 @@ import os
 import sys
 import json
 import numpy as np
+from dotenv import load_dotenv
 from sentence_transformers import SentenceTransformer
 import anthropic
+
+load_dotenv()
 
 DOCUMENTS_DIR = "documents"
 INDEX_FILE = "index.json"

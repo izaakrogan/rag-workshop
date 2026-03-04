@@ -1,12 +1,20 @@
 # Exercise 2: Exploring Embeddings
 
-In exercise 1, embeddings were a black box. You called an API and got vectors back. Now we're going to open that box and look at what's actually inside. We'll embed sentences locally, compute similarity ourselves, and get a feel for how retrieval really works.
+In exercise 1, embeddings were a black box. You called an API and got vectors back. In this exercise we'll embed sentences locally, compute similarity ourselves, and see how retrieval actually works.
 
 No API calls, no vector database. Just vectors and maths.
 
 ## Prerequisites
 
 - Python 3.10+ with your venv from exercise 1 activated
+
+Navigate to this exercise's directory:
+
+```bash
+cd 02-exploring-embeddings
+```
+
+(Or `cd ../02-exploring-embeddings` if you're still in the exercise 1 directory.)
 
 ## Step 1: Install sentence-transformers
 
@@ -76,7 +84,7 @@ Cosine similarity measures the angle between two vectors: 1.0 means they point i
 
 ## Step 4: Simulate retrieval
 
-This is the bit where it clicks. Given a query, find the most similar "document":
+Add this to the bottom of your script. Given a query, find the most similar "document":
 
 ```python
 query = "What happened in the financial markets?"

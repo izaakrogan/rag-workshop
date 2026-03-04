@@ -139,7 +139,7 @@ python ingest.py
 
 You should see output like: `Stored 127 chunks from 12 documents`
 
-So what's going on here? We're splitting each document into 500-character chunks with a 50-character overlap. The overlap is important - without it, sentences that fall on a boundary get cut in half and neither chunk has the complete thought. We then send each chunk to OpenAI's `text-embedding-3-small` model, which returns a 1536-dimensional vector for each one. ChromaDB stores these vectors along with the original text so we can search by similarity later. The `hnsw:space: cosine` bit tells ChromaDB to use cosine similarity for search.
+We're splitting each document into 500-character chunks with a 50-character overlap. The overlap is important - without it, sentences that fall on a boundary get cut in half and neither chunk has the complete thought. We then send each chunk to OpenAI's `text-embedding-3-small` model, which returns a 1536-dimensional vector for each one. ChromaDB stores these vectors along with the original text so we can search by similarity later. The `hnsw:space: cosine` bit tells ChromaDB to use cosine similarity for search.
 
 ## Step 4: Build the retrieval and generation pipeline
 
@@ -219,7 +219,7 @@ Run it:
 python query.py "What is Dan's role in the realm?"
 ```
 
-The important thing to notice here is that we embed the query with the same model we used for the documents (`text-embedding-3-small`). If you use a different model, the vectors live in different spaces and similarity search won't work at all.
+We embed the query with the same model we used for the documents (`text-embedding-3-small`). If you use a different model, the vectors live in different spaces and similarity search won't work at all.
 
 We retrieve the top 5 chunks by default (`n_results=5`). More chunks means more context for Claude but also more noise. The system prompt tells Claude to only answer from the provided context - without this it might just use its own training data, which defeats the point. Each chunk is labelled with its source file so you can trace where the information came from.
 
