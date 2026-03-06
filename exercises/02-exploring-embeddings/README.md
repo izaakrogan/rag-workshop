@@ -1,20 +1,31 @@
 # Exercise 2: Exploring Embeddings
 
-In exercise 1, embeddings were a black box. You called an API and got vectors back. In this exercise we'll embed sentences locally, compute similarity ourselves, and see how retrieval actually works.
+If you get stuck or have questions, come and talk to me.
+
+Here is the core idea behind most of modern AI:
+
+**Anything can be represented as a list of numbers. And if you do it right, things that are similar end up with similar numbers.**
+
+A sentence. An image. A user's taste in films. A molecule. A legal clause. All of them can be turned into a vector (a point in high-dimensional space) such that meaning becomes geometry. Similar things cluster together. Opposites point away from each other. You can do maths on concepts.
+
+This is the heart of deep learning. Not the architecture, not the loss functions. The idea that you can embed the world into a space where similarity is measurable.
+
+In exercise 1, embeddings were a black box. You called an API and got vectors back. In this exercise you'll embed sentences locally, compute similarity yourself, and see how retrieval actually works.
 
 No API calls, no vector database. Just vectors and maths.
+
+---
 
 ## Prerequisites
 
 - Your venv from exercise 1 activated
-
-Navigate to this exercise's directory:
+- Navigate to this exercise's directory:
 
 ```bash
 cd 02-exploring-embeddings
 ```
 
-(Or `cd ../02-exploring-embeddings` if you're still in the exercise 1 directory.)
+---
 
 ## Step 1: Install sentence-transformers
 
@@ -23,6 +34,8 @@ pip install sentence-transformers
 ```
 
 This pulls in PyTorch and lets you run embedding models locally. No API key needed.
+
+---
 
 ## Step 2: Embed some sentences
 
@@ -56,13 +69,15 @@ Run it:
 python explore_embeddings.py
 ```
 
-Each sentence is now a vector of 384 numbers. The norm should be close to 1.0 because these are normalised vectors (unit vectors), which matters in a sec.
+Each sentence is now a vector of 384 numbers. The norm should be close to 1.0, because these are normalised vectors (unit vectors). More on why that matters in a moment.
 
 `all-MiniLM-L6-v2` is a small model that runs on CPU in under a second. `model.encode()` takes a list of strings and returns a numpy array of shape `(n_sentences, 384)`.
 
+---
+
 ## Step 3: Compute cosine similarity
 
-Add this to the bottom of your script:
+Now the interesting bit. Add this to the bottom of your script:
 
 ```python
 def cosine_similarity(a, b):
@@ -78,9 +93,11 @@ for i in range(len(sentences)):
         print(f"{sim:.4f}  |  '{sentences[i][:40]}' vs '{sentences[j][:40]}'")
 ```
 
-Run it again. You should see high similarity (~0.5-0.7) between the semantically similar pairs ("cat on the mat" / "kitten on the rug", "stock market crashed" / "financial markets declined") and low similarity (~0.0-0.2) between unrelated pairs.
+Run it again. You should see high similarity (~0.5-0.7) between the semantically related pairs ("cat on the mat" / "kitten on the rug", "stock market crashed" / "financial markets declined") and low similarity (~0.0-0.2) between unrelated pairs.
 
-Cosine similarity measures the angle between two vectors: 1.0 means they point in the same direction, 0.0 means perpendicular, -1.0 means opposite. Since our vectors are normalised, `cosine_similarity(a, b)` is equivilant to just `np.dot(a, b)` because the division by norms doesn't do anything when both norms are 1.0. I've included the full formula here because it still works if you switch to a model that doesn't normalise its outputs, but in exercise 3 we'll just use the dot product directly.
+Cosine similarity measures the angle between two vectors: 1.0 means they point in exactly the same direction, 0.0 means perpendicular, -1.0 means opposite. Since our vectors are normalised, `cosine_similarity(a, b)` is equivalent to just `np.dot(a, b)`. The division by norms is a no-op when both norms are 1.0. The full formula is written out here because it still works if you switch to a model that doesn't normalise its outputs, but in exercise 3 we'll just use the dot product directly.
+
+---
 
 ## Step 4: Simulate retrieval
 
@@ -105,7 +122,11 @@ similarities.sort(reverse=True)
 print(f"\nBest match: '{similarities[0][1]}'")
 ```
 
-The financial query should rank the two market-related sentences highest. Thats retrieval. Five lines of numpy. Everything else in a RAG system is just scaffolding around this.
+The financial query should rank the two market-related sentences highest.
+
+That's retrieval. Five lines of numpy. Everything else in a RAG system (chunking strategies, vector databases, hybrid search, reranking) is scaffolding around this single operation.
+
+---
 
 ## Step 5: Have a play
 
@@ -114,9 +135,11 @@ Mess around with it. Some ideas:
 - Add more sentences and see how they cluster
 - Try queries phrased very differently from the documents. Does retrieval still work?
 - What happens with ambiguous words? Try "bank" in a financial context vs a river context
-- Embed a long paragraph vs a short sentence on the same topic. Does length affect similarity?
+- Embed a long paragraph and a short sentence on the same topic. Does length affect similarity?
 
-If something surprising happens, come talk to me about it.
+If something surprising happens, come and talk about it.
+
+---
 
 ## Quiz Questions
 
@@ -135,7 +158,7 @@ For normalised vectors, cosine similarity equals the dot product. The norms are 
 </details>
 
 <details>
-<summary><strong>3. What does it mean geometrically when two embeddings have cosine similarity of 0?</strong></summary>
+<summary><strong>3. What does it mean geometrically when two embeddings have a cosine similarity of 0?</strong></summary>
 
 They're perpendicular, pointing in completely unrelated directions. Note this doesn't mean they're "opposites" (that would be -1.0), just that the model sees no relationship between them. You rarely get exactly 0 in practice; unrelated sentences usually land around 0.0 to 0.3.
 
