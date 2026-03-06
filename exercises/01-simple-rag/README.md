@@ -1,12 +1,12 @@
 # Building a RAG System
 
-In this exercise we're going to build a Retrieval-Augmented Generation system - a pipeline that can answer questions about a set of documents. There are three stages:
+In this exercise we're going to build a Retrieval-Augmented Generation system that can answer questions about a set of documents. There are three stages:
 
 1. **Ingestion** - chunk your documents, turn each chunk into a vector embedding, and store them
 2. **Retrieval** - given a question, find the most relevant chunks
 3. **Generation** - pass the retrieved chunks to Claude and get an answer
 
-We're using OpenAI for embeddings, ChromaDB as a vector database, and Claude for generation. These are independant components - it's fine to use different providers for different parts of the pipeline.
+We're using OpenAI for embeddings, ChromaDB as a vector database, and Claude for generation. These are independent components, so you can use different providers for different parts of the pipeline.
 
 ## Prerequisites
 
@@ -40,13 +40,13 @@ OPENAI_API_KEY=your-openai-api-key
 
 ## Step 2: Explore the documents
 
-The `documents/` directory contains articles about the fictional microstate of Founders and Coders. I made all of this up - Claude doesn't know any of it from its training data, so the RAG system has to actually work to answer questions about it.
+The `documents/` directory contains articles about the fictional microstate of Founders and Coders. I made all of this up. Claude doesn't know any of it from its training data, so the RAG system has to actually work to answer questions about it.
 
 ```bash
 ls documents/
 ```
 
-You should see files like `founders_and_coders.txt`, `dan_the_archmage.txt`, `semantic_kelp.txt`, etc. Have a read through a few of them - you'll need to know what's in there to judge whether your RAG system is giving good answers.
+You should see files like `founders_and_coders.txt`, `dan_the_archmage.txt`, `semantic_kelp.txt`, etc. Have a read through a few of them. You'll need to know what's in there to judge whether your RAG system is giving good answers.
 
 ## Step 3: Build the ingestion pipeline
 
@@ -139,7 +139,7 @@ python ingest.py
 
 You should see output like: `Stored 127 chunks from 12 documents`
 
-We're splitting each document into 500-character chunks with a 50-character overlap. The overlap is important - without it, sentences that fall on a boundary get cut in half and neither chunk has the complete thought. We then send each chunk to OpenAI's `text-embedding-3-small` model, which returns a 1536-dimensional vector for each one. ChromaDB stores these vectors along with the original text so we can search by similarity later. The `hnsw:space: cosine` bit tells ChromaDB to use cosine similarity for search.
+We're splitting each document into 500-character chunks with a 50-character overlap. The overlap is important because without it, sentences that fall on a boundary get cut in half and neither chunk has the complete thought. We then send each chunk to OpenAI's `text-embedding-3-small` model, which returns a 1536-dimensional vector for each one. ChromaDB stores these vectors along with the original text so we can search by similarity later. The `hnsw:space: cosine` bit tells ChromaDB to use cosine similarity for search.
 
 ## Step 4: Build the retrieval and generation pipeline
 
@@ -221,7 +221,7 @@ python query.py "What is Dan's role in the realm?"
 
 We embed the query with the same model we used for the documents (`text-embedding-3-small`). If you use a different model, the vectors live in different spaces and similarity search won't work at all.
 
-We retrieve the top 5 chunks by default (`n_results=5`). More chunks means more context for Claude but also more noise. The system prompt tells Claude to only answer from the provided context - without this it might just use its own training data, which defeats the point. Each chunk is labelled with its source file so you can trace where the information came from.
+We retrieve the top 5 chunks by default (`n_results=5`). More chunks means more context for Claude but also more noise. The system prompt tells Claude to only answer from the provided context. Without this it might just use its own training data, which defeats the point. Each chunk is labelled with its source file so you can trace where the information came from.
 
 ## Step 5: Try it out
 
@@ -242,7 +242,7 @@ Now try asking something that isn't in the lore:
 python query.py "What is the capital of France?"
 ```
 
-The system prompt tells Claude to only answer from context - does it refuse, or does it hallucinate?
+The system prompt tells Claude to only answer from context. Does it refuse, or does it hallucinate?
 
 ## How it works
 
@@ -291,7 +291,7 @@ Each model maps text into its own vector space. If you embed documents with one 
 <details>
 <summary><strong>4. What happens if you remove the overlap between chunks?</strong></summary>
 
-Sentences that fall on chunk boundaries get cut in half. The first half ends up in one chunk and the second half in another - neither contains the complete thought. If a question targets that sentence, retrieval might find a partial match or miss it entirely. Overlap ensures boundary sentences appear in full in at least one chunk.
+Sentences that fall on chunk boundaries get cut in half. The first half ends up in one chunk and the second half in another, so neither contains the complete thought. If a question targets that sentence, retrieval might find a partial match or miss it entirely. Overlap ensures boundary sentences appear in full in at least one chunk.
 
 </details>
 
@@ -306,6 +306,20 @@ The embedding would average over the entire document's meaning. If a document co
 <summary><strong>6. What's the tradeoff in choosing how many chunks to retrieve?</strong></summary>
 
 More chunks means you're more likely to include the relevant information, but you also include more irrelevant text. This adds noise that can confuse Claude and uses more tokens (costing more and adding latency). Fewer chunks keeps things lean but risks missing the relevant passage. I find 3-5 chunks is a reasonable starting point.
+
+</details>
+
+<details>
+<summary><strong>7. Will the same document produce the same vector every time?</strong></summary>
+
+Yes, embedding models are deterministic. Same input text, same vector, every time. There's no sampling or randomness like there is in text generation.
+
+When vectors will differ for the "same" document:
+
+- Different model versions (weights change, vectors change entirely)
+- Different preprocessing (whitespace, chunking, Unicode normalisation)
+
+Practical implication: You can safely cache embeddings for unchanged documents. If you change chunking strategy or switch model versions, you must re-embed the entire corpus. Vectors from different models can't be mixed in the same index.
 
 </details>
 

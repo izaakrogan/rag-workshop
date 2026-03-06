@@ -6,7 +6,7 @@ No API calls, no vector database. Just vectors and maths.
 
 ## Prerequisites
 
-- Python 3.10+ with your venv from exercise 1 activated
+- Your venv from exercise 1 activated
 
 Navigate to this exercise's directory:
 

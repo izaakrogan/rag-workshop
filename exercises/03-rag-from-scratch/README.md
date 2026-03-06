@@ -13,10 +13,9 @@ Same RAG pipeline as before, but you can see everthing:
 
 ## Prerequisites
 
-- **Python 3.10 or higher** with your virtual environment active
+- Your virtual environment from exercise 1 active
 - **sentence-transformers** installed (from exercise 2)
 - An **Anthropic API key**
-- The `documents/` directory (already included)
 
 Navigate to this exercise's directory:
 
@@ -29,7 +28,7 @@ cd 03-rag-from-scratch
 ## Step 1: Install any missing dependancies
 
 ```bash
-pip install sentence-transformers anthropic python-dotenv
+pip install anthropic python-dotenv
 ```
 
 Copy your `.env` file from exercise 1:
@@ -251,14 +250,7 @@ Dimension count isn't a direct measure of quality. A well-trained 384-dimensiona
 </details>
 
 <details>
-<summary><strong>4. What would happen if you used a different embedding model for indexing and querying?</strong></summary>
-
-Retrieval would break completely. Each model learns its own vector space. "Cat" might point in one direction in model A's space and a completely different direction in model B's space. Cosine similarity between vectors from different models is meaningless. This is why you always need to re-embed your entire corpus when you switch embedding models.
-
-</details>
-
-<details>
-<summary><strong>5. In the search function, why can we use <code>np.dot(embeddings, query_embedding)</code> instead of computing cosine similarity properly?</strong></summary>
+<summary><strong>4. In the search function, why can we use <code>np.dot(embeddings, query_embedding)</code> instead of computing cosine similarity properly?</strong></summary>
 
 Because `all-MiniLM-L6-v2` outputs normalised vectors (unit length). When vectors are unit length, cosine similarity simplifies to just the dot product because the denominator (product of norms) is always 1.0. So we skip the norm calculations entirely, which is faster. Most embedding models normalise their outputs for exactly this reason.
 
