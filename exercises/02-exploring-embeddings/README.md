@@ -1,7 +1,5 @@
 # Exercise 2: Exploring Embeddings
 
-If you get stuck or have questions, come and talk to me.
-
 Here is the core idea behind most of modern AI:
 
 **Anything can be represented as a list of numbers. And if you do it right, things that are similar end up with similar numbers.**
@@ -13,6 +11,8 @@ This is the heart of deep learning. Not the architecture, not the loss functions
 In exercise 1, embeddings were a black box. You called an API and got vectors back. In this exercise you'll embed sentences locally, compute similarity yourself, and see how retrieval actually works.
 
 No API calls, no vector database. Just vectors and maths.
+
+If you get stuck or have questions, come and talk to me.
 
 ---
 
