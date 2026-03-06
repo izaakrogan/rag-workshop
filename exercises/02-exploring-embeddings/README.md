@@ -6,7 +6,7 @@ Here is the core idea behind most of modern AI:
 
 A sentence. An image. A user's taste in films. A molecule. A legal clause. All of them can be turned into a vector (a point in high-dimensional space) such that meaning becomes geometry. Similar things cluster together. Opposites point away from each other. You can do maths on concepts.
 
-This is the heart of deep learning. Not the architecture, not the loss functions. The idea that you can embed the world into a space where similarity is measurable.
+This is the heart of deep learning: the idea that you can embed the world into a space where similarity is measurable.
 
 In exercise 1, embeddings were a black box. You called an API and got vectors back. In this exercise you'll embed sentences locally, compute similarity yourself, and see how retrieval actually works.
 

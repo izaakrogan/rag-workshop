@@ -127,7 +127,7 @@ def generate(question, results):
         context += f"\n--- Chunk {i + 1} (from {r['source']}, score: {r['score']:.4f}) ---\n{r['text']}\n"
 
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",  # check https://docs.anthropic.com/en/docs/about-claude/models for latest
+        model="claude-sonnet-4-6",
         max_tokens=1024,
         system="You are a helpful assistant. Answer questions based only on the provided context. If the context doesn't contain enough information to answer, say so.",
         messages=[

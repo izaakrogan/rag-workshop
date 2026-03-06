@@ -1,4 +1,4 @@
-# Building a RAG System
+# Exercise 1: Building a RAG System
 
 In this exercise we're going to build a Retrieval-Augmented Generation system that can answer questions about a set of documents. There are three stages:
 
@@ -16,31 +16,28 @@ We're using OpenAI for embeddings, ChromaDB as a vector database, and Claude for
 
 ## Step 1: Set up your environment
 
-Clone the repo and navigate to this exercise:
+Create a project directory and set up a virtual environment:
 
 ```bash
-git clone https://github.com/izaakrogan/rag-workshop.git
-cd rag-workshop/exercises/01-simple-rag
-```
-
-Create a virtual environment and install dependencies:
-
-```bash
+mkdir rag-workshop
+cd rag-workshop
 python3 -m venv venv
 source venv/bin/activate
 pip install anthropic openai chromadb python-dotenv
 ```
 
-Create a `.env` file with your/our API keys (see Discord):
+Create a `.env` file with your API keys:
 
 ```
 ANTHROPIC_API_KEY=your-anthropic-api-key
 OPENAI_API_KEY=your-openai-api-key
 ```
 
+Download the documents dataset and unzip it into a `documents/` directory inside your project folder.
+
 ## Step 2: Explore the documents
 
-The `documents/` directory contains articles about the fictional microstate of Founders and Coders. I made all of this up. Claude doesn't know any of it from its training data, so the RAG system has to actually work to answer questions about it.
+The `documents/` directory contains articles about the fictional microstate of Founders and Coders. None of this is real. Claude doesn't know any of it from its training data, so the RAG system has to actually work to answer questions about it.
 
 ```bash
 ls documents/
@@ -50,7 +47,7 @@ You should see files like `founders_and_coders.txt`, `dan_the_archmage.txt`, `se
 
 ## Step 3: Build the ingestion pipeline
 
-Create a file called `ingest.py`. This script reads your documents, chunks them, embeds the chunks, and stores everything in ChromaDB. Read through it before you run it, and if something doesn't make sense, come and talk to me.
+Create a file called `ingest.py`. This script reads your documents, chunks them, embeds the chunks, and stores everything in ChromaDB. Read through it before you run it.
 
 ```python
 import os
@@ -246,8 +243,6 @@ The system prompt tells Claude to only answer from context. Does it refuse, or d
 
 ## How it works
 
-![RAG architecture](../../rag.png)
-
 **Ingestion** (run once): read documents from disk, split into overlapping chunks, embed each chunk with OpenAI, store embeddings + text in ChromaDB.
 
 **Query** (run per question): embed the question with OpenAI, find the nearest chunks in ChromaDB by cosine similarity, pass the chunks + question to Claude, get an answer grounded in the context.
@@ -309,4 +304,3 @@ When vectors will differ for the "same" document:
 Practical implication: You can safely cache embeddings for unchanged documents. If you change chunking strategy or switch model versions, you must re-embed the entire corpus. Vectors from different models can't be mixed in the same index.
 
 </details>
-
